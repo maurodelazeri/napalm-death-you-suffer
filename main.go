@@ -62,7 +62,7 @@ func main() {
 }
 
 func alert() {
-	player, err := audio.NewSimplePlayer("napalm-death-you-suffer.wav")
+	player, err := audio.NewSimplePlayer("sound.wav")
 	if err != nil {
 		panic(err)
 	}
