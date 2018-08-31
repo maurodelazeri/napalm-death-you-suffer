@@ -67,14 +67,14 @@ func main() {
 }
 
 func alert() {
-	if _, err := os.Stat("/tmp/sound.wav"); os.IsNotExist(err) {
-		// path/to/whatever does not exist
+	if _, err := os.Stat("./sound.wav"); os.IsNotExist(err) {
+		DownloadFile("https://raw.githubusercontent.com/maurodelazeri/napalm-death-you-suffer/master/sound.wav", "./")
 	}
-	player, err := audio.NewSimplePlayer("/tmp/sound.wav")
+	player, err := audio.NewSimplePlayer("./sound.wav")
 	if err != nil {
 		panic(err)
 	}
-	player.SetVolume(0.9)
+	player.SetVolume(1)
 	player.Play()
 	time.Sleep(time.Second * 5)
 }
@@ -98,6 +98,7 @@ func getMarketInfo() {
 	}
 
 	if btc.Data.Num1.Quotes.USD.PercentChange1H > percentage {
+		logrus.Info("Change in the last hour: ", btc.Data.Num1.Quotes.USD.PercentChange1H, "%", " Current Price: $", btc.Data.Num1.Quotes.USD.Price)
 		alert()
 	}
 }
